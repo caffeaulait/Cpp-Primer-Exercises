@@ -10,9 +10,6 @@ class Sales_data
 	friend istream& read(istream& is, Sales_data& item);
 	friend Sales_data add (const Sales_data& lhs, const Sales_data& rhs);
 
-	string bookNo;
-	unsigned units_sold=0;
-	double revenue=0.0;
 	
 public:
 	string const& isbn() const{
@@ -27,8 +24,18 @@ public:
 		bookNo(s),units_sold(n),revenue(n*p) {}
 	Sales_data(istream& is);
 	~Sales_data();
+	inline double avg_price() const;
+
+private:
+	string bookNo;
+	unsigned units_sold=0;
+	double revenue=0.0;
 
 };
+
+inline double Sales_data::avg_price() const{
+	return units_sold? revenue/units_sold : 0;
+}
 
 //ostream& print(ostream& os, const Sales_data& item);
 //istream& read(istream& is, Sales_data& item);
